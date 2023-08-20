@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/page-third-style.css}">
+    <!-- OR <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">-->
+    <link rel="icon" type="image/png" th:href="@{/image/programmer.png}">
+    <!-- Or <link rel="icon" type="image/png" href="/image/programmer.png">-->
+    <!-- <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css"> for testing -->
+
+    <title>page-third-request-student</title>
+</head>
+<script th:src="@{https://code.jquery.com/jquery-3.6.3.min.js}"></script>
+<!-- call Jquery CDN-->
+<!--
+      How to handle null values in Thymeleaf
+      I will describe how to avoid NullPointerException during the rendering process of the Thymeleaf template.
+      if I don't send data to this html file
+      it'll see exception below (SpelEvaluationException)
+      org.springframework.expression.spel.SpelEvaluationException: EL1011E: Method call: Attempted to call method getAge() on null context object
+      And
+      *********************
+      How to fix
+      we will use ? operator to handle nullable
+-->
+<body>
+  <div class="container-header-form"><h2 th:text="${descript}"></h2></div>
+  <div class="container-form">
+    <!-- Again we use @{} for calling path
+         th:action="@{}" for sending some http method
+    -->
+    <!--
+
+        How to use Thymeleaf template to mapping my attribute
+        First set the name of arg your method (Student student)
+        Then use
+        th:object="${}" for mapping to arg method
+        and in tag input
+        Thymeleaf can map attribute of arg
+        use
+        th:field="*{name attribute}"
+    -->
+    <form id="form-student"  th:object="${student}">
+      <div class="mb-3">
+          <label  class="form-label">Age</label>
+          <!--
+              this way use to get some method / attribute
+              Thymeleaf uses -> th:value="${<name variable that you sent>}" for getting method
+          -->
+          <input type="number" id="age" class="form-control" th:value="${student?.getAge()}" th:field="*{age}">
+          <strong id="alert-age"></strong>
+      </div>
+      <div class="mb-3">
+          <label class="form-label">Fullname</label>
+          <input type="text" id="fullname" class="form-control" th:value="${student?.getFullname()}" th:field="*{fullname}">
+          <strong id="alert-fullname"></strong>
+      </div>
+      <div class="mb-3">
+          <label class="form-label">Weight</label>
+          <input type="number" id="weight" class="form-control" step="any" min="0" th:value="${student?.getWeight()}" th:field="*{weight}">
+          <strong id="alert-weight"></strong>
+      </div>
+      <div class="mb-3">
+          <label class="form-label">Height</label>
+          <input type="number" id="height" class="form-control" step="any" min="0" th:value="${student?.getHeight()}" th:field="*{height}">
+          <strong id="alert-height"></strong>
+      </div>
+       <div class="mb-3">
+           <select id="nisitYear" class="form-select" required th:field="*{nisitYear}">
+               <option value="freshman">Freshman</option>
+               <option value="sophomore">Sophomore</option>
+               <option value="senior">Senior</option>
+               <option value="junior">Junior</option>
+       </select>
+       </div>
+        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        <strong id="goto-second"></strong>
+    </form>
+  </div>
+<!-- called js file by Thymeleaf -->
+<script th:src="@{/js/script-request-student.js}"></script>
+</body>
+</html>

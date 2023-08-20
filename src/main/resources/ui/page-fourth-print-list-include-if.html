@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"> <!-- for convert text to html-->
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- New browser
+       Depending on the type of file you’re using
+       As type="image/png"
+          type="image/gif"
+          type="image/jpeg"
+          ...
+   -->
+  <!--
+       when use dependency
+       spring-boot-starter-thymeleaf
+       I can access subdirectory
+       ####
+       By default, Thymeleaf expects us to place those templates in the src/main/resources/templates folder.
+       For CSS and JavaScript files, the default directory is src/main/resources/static.
+       -->
+  <link rel="icon" type="image/png" th:href="@{/image/programmer.png}">
+  <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/page-fourth-style.css}">
+  <title>page-fourth-print-list</title>
+</head>
+<body>
+<!--
+      **** Standard Expressions of Thymeleaf
+      (These expressions help bind the data from the template context(model) into the resulting HTML(view))
+      ${...}: Variable expressions
+
+      (Selection expressions are just like variable expressions, except they will be executed on a previously selected object instead of the whole context variables map.
+      ### To use selection expressions you first need to define a th:object attribute.)
+      *{...} : Selection expressions
+
+      (Link expressions are meant to build URLs in Thymeleaf templates. )
+      @{...} : Link (URL) expressions
+-->
+<div class="container-header-table">
+  <h2 th:text="${descript}"></h2>
+  <a class="btn-primary" th:href="@{/api/form}" style="text-decoration: none;">add student</a>
+</div>
+<div class="container-table">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th> age </th>
+        <th> fullname </th>
+        <th> weight </th>
+        <th> height </th>
+        <th> nisit year </th>
+        <th> option 1 </th>
+      </tr>
+      <!--
+             age	fullname weight	height ...
+      -->
+    </thead>
+    <tbody>
+      <!-- this way use to loop list-->
+      <tr th:each="data : ${data}">
+        <td>
+            <!--
+
+              This way is how to use if in thymeleaf
+              Can't use && operation
+            -->
+            <span th:if="(${data?.age} >= 10)">Denarian</span>
+            <span th:if="(${data?.age} >= 20)">Vicenarian</span>
+            <span th:if="(${data?.age} >= 30)">Tricenarian</span>
+        </td>
+        <td><span th:text="${data?.fullname}"> </span></td>
+        <td><span th:text="${data?.weight}"> </span></td>
+        <td><span th:text="${data?.height}"> </span></td>
+        <td><span th:text="${data?.nisitYear}"> </span></td>
+        <td class="text-center">
+            <a class="btn btn-danger btn-xs" th:href="@{/api/delete/{fullname}(fullname=${data?.fullname})}">delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

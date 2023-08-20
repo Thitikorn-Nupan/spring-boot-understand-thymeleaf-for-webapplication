@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"> <!-- for convert text to html-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- New browser
+         Depending on the type of file you’re using
+         As type="image/png"
+            type="image/gif"
+            type="image/jpeg"
+            ...
+     -->
+    <!--
+         when use dependency
+         spring-boot-starter-thymeleaf
+         I can access subdirectory
+         ####
+         By default, Thymeleaf expects us to place those templates in the src/main/resources/templates folder.
+         For CSS and JavaScript files, the default directory is src/main/resources/static.
+         -->
+    <link rel="icon" type="image/png" th:href="@{/image/programmer.png}">
+    <!-- Or <link rel="icon" type="image/png" href="/image/programmer.png">-->
+    <!--
+        This way below , can access simple
+        <link rel="icon" type="image/png" href="../static/image/programmer.png">
+    -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <!-- OR <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" th:href="@{/css/page-second-style.css}">
+    <!-- <link rel="stylesheet" href="/css/page-second-style.css">-->
+    <!--
+         Note : when check F12 it will show format like below
+         <link rel="icon" type="image/png" href="/image/programmer.png">
+         <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    -->
+    <!-- use @{} for getting path -->
+    <!-- use ${} for getting data -->
+    <title>page-second-print-list</title>
+</head>
+<body>
+    <div class="container-header-table">
+        <h2 th:text="${descript}"></h2>
+        <a class="btn-primary" th:href="@{/api/form}" style="text-decoration: none;">add student</a>
+    </div>
+    <div class="container-table">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th> age </th>
+                <th> fullname </th>
+                <th> weight </th>
+                <th> height </th>
+                <th> nisit year </th>
+                <th> option 1 </th>
+
+            </tr>
+            <!--
+                   age	fullname	weight	height
+            -->
+            </thead>
+            <tbody>
+            <!-- this way use to loop list-->
+            <tr th:each="data : ${data}">
+                          <!-- th:text ="${}" for getting values -->
+                <!-- can use ${data.getAge()} -->
+                <!-- can use ${data.getFullname()} -->
+                <td><span th:text="${data?.age}"> </span></td>
+                <td><span th:text="${data?.fullname}"> </span></td>
+                <td><span th:text="${data?.weight}"> </span></td>
+                <td><span th:text="${data?.height}"> </span></td>
+                <td><span th:text="${data?.nisitYear}"> </span></td>
+                <td class="text-center">
+                    <!--
+                        this way below is
+                        How to send req thru path
+                        by Thymeleaf
+                    -->
+                    <a class="btn btn-danger btn-xs" th:href="@{/api/delete/{fullname}(fullname=${data?.fullname})}">delete</a>
+                </td>
+            </tr>
+            <!--
+                    19	Json smite	60.6	166.6
+                    20	Adam smite	55.6	156.6
+                    19	Mark smite	82.6	196.6
+            -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
