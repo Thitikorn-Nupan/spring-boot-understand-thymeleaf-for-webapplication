@@ -70,17 +70,15 @@ class ScriptRequestStudent {
         }
         function setAjax(age,fullname,weight,height,nisitYear) { /* using ajax to send request to my control in java class */
             $.ajax({
-                url : '/api/add-student',
+                url : '/page/add-student',
                 type : 'post' ,
                 json : 'json' ,
                 data : { age,fullname,weight,height,nisitYear } , /* parameter will map to args of java method */
                 success : function () {
-                    /* when your req was success in {} will do something */
-                    $('#goto-second').html("<a class=\"btn btn-primary\" href='/api/get-student' >all students</a>").show(2000)
+                    $('#goto-second').html("<a class=\"btn btn-primary\" href='/page/get-student' >all students</a>").show(2000)
                 }
             })
         }
-
         $(document).ready(function () { /* start Jquery */
             setEvent()
         })

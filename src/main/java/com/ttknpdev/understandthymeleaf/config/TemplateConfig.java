@@ -1,16 +1,17 @@
-package com.ttknpdev.understandthymeleaf.service;
+package com.ttknpdev.understandthymeleaf.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-/*
+/**
     this class for setting new path of html file
     By defaults. Spring boot will auto configure view resolver for Thymeleaf whenever it will find the springboot-thymeleaf-starter
     dependency on the classpath. Spring boot will pick Thymeleaf templates (HTML pages) from resources/templates folder.
-*  */
+*/
 @Configuration
-public class Template {
+public class TemplateConfig {
+
     @Bean
     public ClassLoaderTemplateResolver yourTemplateResolver() {
         ClassLoaderTemplateResolver yourTemplateResolver = new ClassLoaderTemplateResolver();

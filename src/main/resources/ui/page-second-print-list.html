@@ -56,14 +56,11 @@
                 <th> option 1 </th>
 
             </tr>
-            <!--
-                   age	fullname	weight	height
-            -->
             </thead>
             <tbody>
             <!-- this way use to loop list-->
             <tr th:each="data : ${data}">
-                          <!-- th:text ="${}" for getting values -->
+                <!-- th:text ="${}" for getting values -->
                 <!-- can use ${data.getAge()} -->
                 <!-- can use ${data.getFullname()} -->
                 <td><span th:text="${data?.age}"> </span></td>

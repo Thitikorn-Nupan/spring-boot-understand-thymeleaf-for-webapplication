@@ -13,5 +13,4 @@ public class Student {
     private Float weight;
     private Float height;
     private String nisitYear;
-
 }
